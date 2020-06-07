@@ -15,5 +15,11 @@ productRouter
   .post('/product/getProductBySearch', productController.GetProductBySearch)
   .post('/product/getDetails', productController.GetDetails)
   .post('/product/getDetailsPicture', productController.GetDetailsPicture)
+  .post('/product/getProductBySellerID',productController.GetProductBySellerID)
+  .post('/product/changeProductTitle',productController.ChangeProductTitle)
+  .post('/product/changeProductIntro',productController.ChangeProductIntro)
+  .post('/product/changeSellPrice',productController.ChangeSellPrice)
+  .post('/product/changePrice',productController.ChangePrice)
+
 
 module.exports = productRouter;

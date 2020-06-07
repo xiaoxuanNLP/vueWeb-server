@@ -6,6 +6,7 @@ const KoaStatic = require('koa-static');
 const KoaBody = require('koa-body');
 const Session = require('koa-session');
 
+
 let { Port, staticDir } = require('./config');
 
 let app = new Koa();
@@ -41,6 +42,10 @@ app.use(KoaBody(koaBodyConfig));
 // 使用路由中间件
 const Routers = require('./app/routers');
 app.use(Routers.routes()).use(Routers.allowedMethods());
+
+const KoaLogger = require('koa-logger')
+const logger = KoaLogger();
+app.use(logger);
 
 app.listen(Port, () => {
   console.log(`服务器启动在${ Port }端口`);

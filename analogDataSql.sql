@@ -301,3 +301,5 @@ values
 insert into product_picture
 values
   (null, 35, "public/imgs/phone/picture/protectingShell-Mix-3-1.jpg", null);
+
+insert discount values (null,9);

@@ -96,3 +96,7 @@ create table collect(
   constraint FK_collect_buyer_id foreign key (buyer_id) references buyers (buyer_id),
   constraint FK_collect_id foreign key (product_id) references product (product_id)
 );
+create table discount(
+    id int primary key auto_increment,
+    dis int not null
+);

@@ -220,5 +220,11 @@ if(user_kind==='buyer'){
     } catch (error) {
       reject(error);
     }
+  },
+  test: async ctx =>{
+    ctx.body = {
+      code: '001',
+      msg: 'echo'
+    }
   }
 };

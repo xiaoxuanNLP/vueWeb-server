@@ -4,6 +4,13 @@
 const db = require('./db.js');
 
 module.exports = {
+  //根据卖家id得到买家昵称
+  GetSellerName : async (seller_id)=>{
+    const sql = "select userName from sellers where seller_id = ?";
+    const seller = await db.query(sql,[seller_id]);
+    return seller[0].userName;
+  },
+  //根据产品id得到卖家id
   GetSellerID : async (product_id)=>{
     const sql = "select seller_id from product where product_id = ?";
     const seller = await db.query(sql,[product_id])
@@ -65,5 +72,34 @@ module.exports = {
   GetDetailsPicture: async (productID) => {
     const sql = "select * from product_picture where product_id = ? ";
     return await db.query(sql, productID);
+  },
+  //连接数据库,根据卖家id,获取商品详细信息
+  GetProductBySellerID: async (seller_id,offset = 0,rows = 0) => {
+    let sql = 'select * from product where seller_id = ? ';
+    if(rows!==0){
+      sql += "order by product_sales desc limit " + offset + "," + rows;
+    }
+    console.log(sql);
+    return await db.query(sql,[seller_id]);
+  },
+  //修改商品标题
+  ChangeProductTitle: async (productID,title) =>{
+    const sql = "update product set product_name = ? where product_id = ? ";
+    return await db.query(sql,[title,productID]);
+  },
+  //修改商品介绍
+  ChangeProductIntro: async (productID,intro) => {
+    const sql = "update product set product_intro = ? where product_id = ? ";
+    return await db.query(sql,[intro,productID]);
+  },
+  //修改商品卖价
+  ChangeSellPrice: async (productID,sellPrice) => {
+    const sql = "update product set product_selling_price = ? where product_id = ? ";
+    return await db.query(sql,[sellPrice,productID])
+  },
+  //修改商品定价
+  ChangePrice: async (productID,price) => {
+    const sql = "update product set product_price = ? where product_id = ? ";
+    return await db.query(sql,[price,productID])
   }
-}
+};

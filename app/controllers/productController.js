@@ -137,10 +137,13 @@ module.exports = {
     let { productID } = ctx.request.body;
 
     const Product = await productDao.GetProductById(productID);
+    const seller_id = Product[0].seller_id;
+    const sellerName = await productDao.GetSellerName(seller_id);
 
     ctx.body = {
       code: '001',
       Product,
+      sellerName
     }
   },
   /**
@@ -155,6 +158,99 @@ module.exports = {
     ctx.body = {
       code: '001',
       ProductPicture,
+    }
+  },
+  /**
+   * 根据商品id,获取商品图片,用于食品详情的页面展示
+   * @param {Object} ctx
+   */
+  GetProductBySellerID: async ctx => {
+    let{ user_id,currentPage,pageSize } = ctx.request.body;
+    //开始计算索引
+    const offset = (currentPage-1)*pageSize;
+    //获取分类列表
+    const Product = await productDao.GetProductBySellerID(user_id,offset,pageSize);
+
+    ctx.body = {
+      code: '001',
+      Product
+    }
+  },
+  /**
+  * 根据商品id，对商品名进行修改
+  * @param {Object} ctx
+  */
+  ChangeProductTitle: async ctx => {
+    let { productID,title } = ctx.request.body;
+
+    const product = await productDao.ChangeProductTitle(productID,title);
+    if (product.affectedRows === 1){
+      ctx.body = {
+        code: '001',
+        msg: '修改标题成功'
+      }
+    }else {
+      ctx.body = {
+        code:'002',
+        msg: '修改标题失败'
+      }
+    }
+  },
+  /**
+   * 根据商品id，对介绍进行修改
+   * @param {Object} ctx
+   */
+  ChangeProductIntro: async ctx => {
+    let { productID,intro} = ctx.request.body;
+    const product = await productDao.ChangeProductIntro(productID,intro);
+    if(product.affectedRows === 1){
+      ctx.body = {
+        code: '001',
+        msg: '修改介绍成功'
+      }
+    }else {
+      ctx.body = {
+        code:'002',
+        msg: '修改介绍失败'
+      }
+    }
+  },
+  /**
+   * 根据商品id，修改实际卖价
+   * @param {Object} ctx
+   */
+  ChangeSellPrice: async ctx => {
+    let { productID,sellPrice } = ctx.request.body;
+    const product = await productDao.ChangeSellPrice(productID,sellPrice);
+    if(product.affectedRows === 1){
+      ctx.body = {
+        code: '001',
+        msg: '修改卖价成功'
+      }
+    }else {
+      ctx.body = {
+        code:'002',
+        msg: '修改卖价失败'
+      }
+    }
+  },
+  /**
+   * 根据商品id，修改原价
+   * @param {Object} ctx
+   */
+  ChangePrice: async ctx => {
+    let { productID,price } = ctx.request.body;
+    const product = await productDao.ChangePrice(productID,price);
+    if(product.affectedRows === 1){
+      ctx.body = {
+        code: '001',
+        msg: '修改卖价成功'
+      }
+    }else {
+      ctx.body = {
+        code:'002',
+        msg: '修改卖价失败'
+      }
     }
   }
 }
