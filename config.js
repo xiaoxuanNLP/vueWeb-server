@@ -11,9 +11,8 @@ module.exports = {
   dbConfig: {
     connectionLimit: 10,
     host: 'localhost',
-    port: '3307',
     user: 'root',
-    password: '2000.dawn',
+    password: 'Xuan123#',
     database: 'VueMall'
   }
 }

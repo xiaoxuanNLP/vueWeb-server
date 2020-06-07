@@ -4,6 +4,7 @@
 const orderDao = require('../models/dao/orderDao');
 const shoppingCartDao = require('../models/dao/shoppingCartDao');
 const productDao = require('../models/dao/productDao');
+const userDao = require('../models/dao/userDao');
 const checkLogin = require('../middleware/checkLogin');
 
 module.exports = {
@@ -126,5 +127,24 @@ module.exports = {
     } catch (error) {
       reject(error);
     }
+  },
+  /**
+   * 确认订单
+   */
+  SureOrder: async (ctx) =>{
+    let { order_id } = ctx.request.body;
+    const result = await orderDao.SureOrder(order_id);
+
+    if(result.affectedRows === 1){
+      ctx.body = {
+        code:'001',
+        msg:'确认成功'
+      }
+    }else {
+      ctx.body={
+        code:'002',
+        msg:'确认失败'
+      }
+    }
   }
-}
+};

@@ -26,5 +26,14 @@ module.exports = {
       sql += ",(null,?,?,?,?,?,?,?,?)"
     }
     return await db.query(sql, data);
+  },
+  //得到所有订单信息
+  GetAllOrder: async ()=>{
+    const sql = 'select * from orders';
+    return await db.query(sql,[]);
+  },
+  SureOrder: async (order_id)=>{
+    const sql = 'update orders set isSure = true where order_id = ? ';
+    return await db.query(sql,[order_id]);
   }
 }

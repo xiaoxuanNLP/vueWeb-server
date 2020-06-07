@@ -11,8 +11,8 @@ adminRouter
     .post('/api/admin/login',adminController.Login)
     .post('/api/admin/modifydiscount',adminController.modifyDiscount)
     .get('/api/admin/getdiscount',adminController.GetDiscount)
-    // .get('/api/admin/getorderlist',adminController.Getorderlist)
-    // .post('/admin/cancelorder',adminController.Cancelorder)
+    .get('/api/admin/getorderlist',adminController.GetAllOrder)
+    .post('/api/admin/cancelorder',adminController.Cancelorder)
     // .post('/admin/')
 
 module.exports = adminRouter;

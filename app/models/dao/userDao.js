@@ -33,5 +33,15 @@ module.exports = {
        sql = 'insert into sellers values(null,?,?,null)';
     }
     return await db.query(sql, [userName, password]);
-  }
-}
+  },
+    //通过用户id寻找名字
+    GetNameById: async (userId,user_kind) => {
+      var sql;
+      if(user_kind === 'buyer'){
+          sql = 'select * from buyers where buyer_id = ? ';
+      }else if(user_kind === 'seller'){
+          sql = 'select * from sellers where seller_id = ? ';
+      }
+      return await db.query(sql,[userId]);
+    }
+};
