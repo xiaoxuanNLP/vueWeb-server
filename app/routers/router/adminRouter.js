@@ -8,8 +8,11 @@ const adminController = require('../../controllers/adminController');
 let adminRouter = new Router();
 
 adminRouter
-    .post('/admin/login',adminController.Login)
-    .post('/admin/getorderlist',adminController.Getorderlist)
-    .post('/admin/cancelorder',adminController.Cancelorder)
-    .post('/admin/getdiscount',adminController.GetDiscount)
+    .post('/api/admin/login',adminController.Login)
+    .post('/api/admin/modifydiscount',adminController.modifyDiscount)
+    .get('/api/admin/getdiscount',adminController.GetDiscount)
+    // .get('/api/admin/getorderlist',adminController.Getorderlist)
+    // .post('/admin/cancelorder',adminController.Cancelorder)
     // .post('/admin/')
+
+module.exports = adminRouter;

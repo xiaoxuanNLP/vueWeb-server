@@ -25,7 +25,6 @@ module.exports = {
     for (let i = 0; i < length - 1; i++) {
       sql += ",(null,?,?,?,?,?,?,?,?)"
     }
-
     return await db.query(sql, data);
   }
 }

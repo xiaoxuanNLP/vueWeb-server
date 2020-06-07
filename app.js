@@ -11,6 +11,10 @@ let { Port, staticDir } = require('./config');
 
 let app = new Koa();
 
+//允许跨域
+const cors = require('koa2-cors');
+app.use(cors());
+
 // 处理异常
 const error = require('./app/middleware/error');
 app.use(error);
