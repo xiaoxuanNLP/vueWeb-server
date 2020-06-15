@@ -9,7 +9,6 @@ let userRouter = new Router();
 
 userRouter
   .post('/users/login', userController.Login)
-  .post('/users/miniProgramLogin', userController.miniProgramLogin)
   .post('/users/findUserName', userController.FindUserName)
   .post('/users/register', userController.Register)
     .post('/users/getDiscount',adminController.GetDiscount)
