@@ -82,7 +82,7 @@ if(user_kind==='buyer'){
       return;
     }
     // 连接数据库根据用户名查询用户信息
-    let user = await userDao.FindUserName(userName);
+    let user = await userDao.FindUserName(userName,user_kind);
     // 结果集长度为0则代表不存在该用户,可以注册
     if (user.length === 0) {
       ctx.body = {
@@ -120,7 +120,7 @@ if(user_kind==='buyer'){
     }
     // 连接数据库根据用户名查询用户信息
     // 先判断该用户是否存在
-    let user = await userDao.FindUserName(userName);
+    let user = await userDao.FindUserName(userName,user_kind);
 
     if (user.length !== 0) {
       ctx.body = {
