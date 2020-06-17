@@ -56,7 +56,7 @@ module.exports = {
       }
       return false;
     }
-    if(user_kind.length() === 0){
+    if(user_kind.length === 0){
       ctx.body = {
         code: '002',
         msg: '用户登陆类型必须选择'
